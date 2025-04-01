@@ -12,6 +12,11 @@ const addContactUs = async (req, res) => {
 }
 
 const getContactUs = async (req, res) => {
+    const SECRET_CODE = "Zoro50501#"
+    const { code } = req.body;
+    if (code !== SECRET_CODE) {
+        return res.status(403).json({ error: 'Forbidden' });
+    }
     try {
         const contactUsList = await ContactUs.find();
         res.status(200).json(contactUsList);
